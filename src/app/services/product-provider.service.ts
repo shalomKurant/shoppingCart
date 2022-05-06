@@ -10,16 +10,21 @@ export class ProductProviderService {
   constructor(private LocaStorageAccessService: LocaStorageAccessService) { }
 
   public async getProduct(): Promise<IProduct[]> {
-    const response = await fetch('https://fakestoreapi.com/products')
-    const jsonResponse = await response.json()
+    // const response = await fetch('https://fakestoreapi.com/products')
+    // const jsonResponse = await response.json()
     // return jsonResponse;
-    // const full = [...mock, ...mock, ...mock, ...mock];
-    // const userList: IProduct[] = this.LocaStorageAccessService.getList();
-    const objectList = jsonResponse.map((product: IProduct) =>  {
-      return new Product(product.id, product.title, product.price, product.category, product.description, product.image, product.rating, product.amount) 
-    })
-    return objectList;
-    // return <any> mock;
+    const userList: IProduct[] = this.LocaStorageAccessService.getList();
+    return mock.map((product: IProduct) => {
+      const userProduct = userList.find(item => item.id === product.id);
+      return new Product(product.id, 
+                          product.title, 
+                          product.price, 
+                          product.category, 
+                          product.description, 
+                          product.image, 
+                          product.rating, 
+                          userProduct ? userProduct.amount : product.amount);
+    });
   }
 }
 

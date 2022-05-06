@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { EventManagerService } from '../services/event-manager.service';
 import { LocaStorageAccessService } from '../services/local-storage-access.service';
 import { IProduct } from '../types/Product';
@@ -9,6 +9,8 @@ import { IProduct } from '../types/Product';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  
+  @Input() products!: IProduct[];
 
   public cartProducts!: IProduct[];
   
@@ -21,8 +23,8 @@ export class CartComponent implements OnInit {
 
       this.onProductAdded(newProduct);
     })
-
-    this.cartProducts = this.LocaStorageAccessService.getList();
+    const userProducts = this.LocaStorageAccessService.getList();
+    this.cartProducts = this.products.filter(product => userProducts.find(userProduct => userProduct.id === product.id))
   }
 
   public getProductPrice(product: IProduct): number {
