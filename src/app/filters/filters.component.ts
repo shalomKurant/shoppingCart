@@ -1,6 +1,6 @@
 import { Input, Component, OnInit  } from '@angular/core';
 import { FilterCreatorService } from '../services/filter-creator.service';
-import { IProduct } from '../types/Product';
+import { Product } from '../types/Product';
 import { IFieldFilter } from "../types/IFieldFilter";
 
 @Component({
@@ -9,7 +9,7 @@ import { IFieldFilter } from "../types/IFieldFilter";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
-  @Input() products!: IProduct[];
+  @Input() products!: Product[];
   public filterOptions?: IFieldFilter[];
 
   constructor(private FilterCreatorService: FilterCreatorService) { }

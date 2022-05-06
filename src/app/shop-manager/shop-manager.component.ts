@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterCreatorService } from '../services/filter-creator.service';
 import { ProductProviderService } from '../services/product-provider.service';
-import { IProduct } from '../types/Product';
+import { Product } from '../types/Product';
 
 @Component({
   selector: 'shop-manager',
@@ -10,7 +10,7 @@ import { IProduct } from '../types/Product';
 })
 export class ShopManagerComponent implements OnInit {
 
-  public products: IProduct[] = [];
+  public products: Product[] = [];
   public isListLoading: boolean = true;
   public searchTextValue: string = "";
   public sholdShowError: boolean = false;

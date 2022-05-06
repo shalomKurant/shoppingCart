@@ -1,7 +1,7 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { EventManagerService } from '../services/event-manager.service';
 import { LocaStorageAccessService } from '../services/local-storage-access.service';
-import { IProduct } from '../types/Product';
+import { Product } from '../types/Product';
 
 @Component({
   selector: 'cart',
@@ -10,15 +10,15 @@ import { IProduct } from '../types/Product';
 })
 export class CartComponent implements OnInit {
   
-  @Input() products!: IProduct[];
+  @Input() products!: Product[];
 
-  public cartProducts!: IProduct[];
+  public cartProducts!: Product[];
   
   constructor(private EventManagerService: EventManagerService, 
               private LocaStorageAccessService: LocaStorageAccessService) { }
 
   ngOnInit(): void {
-    this.EventManagerService.getCartObservable().subscribe((newProduct: IProduct) => {
+    this.EventManagerService.getCartObservable().subscribe((newProduct: Product) => {
       if (!newProduct) return;
 
       this.onProductAdded(newProduct);
@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
     this.cartProducts = this.products.filter(product => userProducts.find(userProduct => userProduct.id === product.id))
   }
 
-  public getProductPrice(product: IProduct): number {
+  public getProductPrice(product: Product): number {
     return product.amount * product.price;
   }
 
@@ -37,14 +37,14 @@ export class CartComponent implements OnInit {
     }, 0)
   }
 
-  public removeItem(product: IProduct): void {
+  public removeItem(product: Product): void {
     product.amount = 0;
     const indexProductToRemove: number = this.cartProducts.indexOf(product);
     this.cartProducts.splice(indexProductToRemove, 1);
     this.LocaStorageAccessService.remove(product);
   }
 
-  private onProductAdded(newProduct: IProduct): void {
+  private onProductAdded(newProduct: Product): void {
     const existingProduct = this.cartProducts.find(product => product.id === newProduct.id);
     if (existingProduct) {
       existingProduct.amount++;
@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
     this.LocaStorageAccessService.save(newProduct);
   }
 
-  public updateAmount(product: IProduct, actionType: string): void {
+  public updateAmount(product: Product, actionType: string): void {
     if (actionType === 'increase') {
       product.amount++;
     } else {

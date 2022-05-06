@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IProduct } from '../types/Product';
+import { Product } from '../types/Product';
 
 const localStorageKey = "PRODUCTS";
 
@@ -10,25 +10,25 @@ export class LocaStorageAccessService {
 
   constructor() { }
 
-  public save(product: IProduct): void {
-      const savedList: IProduct[] = this.getList();
-      const newList: IProduct[] = savedList.filter(item => item.id !== product.id);
+  public save(product: Product): void {
+      const savedList: Product[] = this.getList();
+      const newList: Product[] = savedList.filter(item => item.id !== product.id);
       newList.push(product);
       this.saveList(newList);
   }
 
-  public remove(product: IProduct): void {
-    const savedList: IProduct[] = this.getList();
-    const newList: IProduct[] = savedList.filter(item => item.id !== product.id);
+  public remove(product: Product): void {
+    const savedList: Product[] = this.getList();
+    const newList: Product[] = savedList.filter(item => item.id !== product.id);
     this.saveList(newList);
   }
 
-  public getList(): IProduct[] {
+  public getList(): Product[] {
     const list = localStorage.getItem(localStorageKey);
     return list ? JSON.parse(list) : [];
   }
 
-  private saveList(list: IProduct[]): void {
+  private saveList(list: Product[]): void {
     localStorage.setItem(localStorageKey, JSON.stringify(list));
   }
 }

@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IProduct } from '../types/Product';
+import { Product } from '../types/Product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventManagerService {
 
-  private cartObservable!: BehaviorSubject<IProduct>;
+  private cartObservable!: BehaviorSubject<Product>;
 
   constructor() {
     this.initObservable();
    }
 
-   public getCartObservable(): BehaviorSubject<IProduct> {
+   public getCartObservable(): BehaviorSubject<Product> {
     return this.cartObservable;
   }
 
   private initObservable(): void {
-    this.cartObservable = new BehaviorSubject<IProduct>(null!);
+    this.cartObservable = new BehaviorSubject<Product>(null!);
   }
 }

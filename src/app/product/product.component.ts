@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { EventManagerService } from '../services/event-manager.service';
 import { FilterCreatorService } from '../services/filter-creator.service';
-import { IProduct } from '../types/Product';
+import { Product } from '../types/Product';
 
 @Component({
   selector: 'product',
@@ -11,8 +11,8 @@ import { IProduct } from '../types/Product';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() item!: IProduct;
-  private cartObservable!: BehaviorSubject<IProduct>;
+  @Input() item!: Product;
+  private cartObservable!: BehaviorSubject<Product>;
 
   constructor(private EventManagerService: EventManagerService,
               private FilterCreatorService: FilterCreatorService) { }

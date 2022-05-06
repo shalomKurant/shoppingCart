@@ -1,7 +1,7 @@
 import { FilterType } from "./FilterType";
 import { IFilter } from "./IFilter";
 
-export class Product implements IProduct {
+export class Product {
   constructor(public id: number,
               public title: string,
               public price: number,
@@ -14,7 +14,7 @@ export class Product implements IProduct {
               },
               public amount: number = 0) {}
 
-    public shouldDisplay(filters: any): boolean {
+    public shouldDisplay(filters: {}): boolean {
       for (const [fieldName, fieldFilters] of Object.entries(filters)) {
         for (const filter of <IFilter[]> fieldFilters) {
           const fieldValue = this.getFieldValue(fieldName);
@@ -27,7 +27,7 @@ export class Product implements IProduct {
       return true;
     }
 
-  // TODO Find better way 
+  // TODO Find better solution 
   private getFieldValue(fieldName: string): number | string {
     if (fieldName === 'rating') {
       return this.rating.rate;
@@ -51,20 +51,4 @@ export class Product implements IProduct {
     }
     return true;
   }
-}
-
-export interface IProduct {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
-    amount: number;
-
-    shouldDisplay(filters: any): boolean;
 }

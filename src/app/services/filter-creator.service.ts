@@ -82,22 +82,16 @@ export class FilterCreatorService {
           },
           {
             type: FilterType.EQUAL,
-            value: 2,
-            label: "2"
-          },
-          {
-            type: FilterType.EQUAL,
             value: 3,
             label: "3"
           },
           {
             type: FilterType.EQUAL,
-            value: 4,
-            label: "4"
+            value: 5,
+            label: "5"
           }
         ]
       } 
     ]
   }
-
 }
