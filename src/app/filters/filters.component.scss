@@ -1,0 +1,12 @@
+:host {
+    margin: 10px;
+    float: left;
+    width: 10%;
+
+    .filters {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+}

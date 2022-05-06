@@ -1,0 +1,4 @@
+<mat-card-subtitle>{{fieldFilter.field}}</mat-card-subtitle>
+<div *ngFor="let filter of fieldFilter.filters">
+    <mat-checkbox (change)="onFilterChange($event, filter)">{{filter.label}}</mat-checkbox>
+</div>

@@ -1,0 +1,16 @@
+<div class="product-content" *ngIf="shouldShow()">
+    <img [src]="item.image" class="image">
+    <div class="base-details">
+        <div class="title">{{item.title}}</div>
+        <div class="price">{{item.price}}</div>
+    </div>
+    <div class="description" matTooltip={{item.description}}>{{item.description}}</div>
+    <div class="add-to-cart-button" (click)="addToCart()">
+        Add To Cart <span *ngIf="item.amount">({{item.amount}})</span>
+    </div>
+    <div class="rating">
+        <div class="star" *ngFor="let _ of ' '.repeat(5).split('') ; let i = index">
+            <mat-icon>{{i < item.rating.rate ? 'star' : 'star_border'}}</mat-icon>
+        </div>
+    </div>
+</div>

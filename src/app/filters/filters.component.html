@@ -1,0 +1,8 @@
+<mat-card>
+    <mat-card-title>Filters:</mat-card-title>
+    <div class="filters">
+        <div *ngFor="let fieldFilter of filterOptions">
+            <filter [fieldFilter]="fieldFilter"></filter>
+        </div>
+    </div>
+</mat-card>

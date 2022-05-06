@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+
+    .products {
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    // .viewport {
+    //     height: 500px;
+    //     width: 100%;
+    //     border: 1px solid black;
+    //     display: flex;
+    //     flex-wrap: wrap;
+    //     justify-content: center;
+    //   }
+    //   .cdk-virtual-scroll-content-wrapper {
+    //     display: flex;
+    //     flex-wrap: wrap;
+    //     justify-content: center;
+    //   }
+      
+    //   .product-item {
+    //     height: 300px;
+    //   }
+}

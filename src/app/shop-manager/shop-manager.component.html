@@ -1,0 +1,25 @@
+<div class="result-info">
+    <div class="loading-info" *ngIf="isListLoading">
+        Loading items...
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="error" *ngIf="sholdShowError">Sorry, something went wrong</div>
+</div>
+<div *ngIf="!isListLoading">
+    <div class="free-search">
+        <mat-form-field>
+            <mat-label>Type to search...</mat-label>
+            <input matInput [(ngModel)]="searchTextValue" (input)="searchText()">
+        </mat-form-field>
+    </div>
+    <div class="body">
+            <filters 
+            [products]="products">
+        </filters>
+        <cart></cart>
+        <product-list 
+            [products]="products">
+        </product-list>
+    </div>
+</div>
+

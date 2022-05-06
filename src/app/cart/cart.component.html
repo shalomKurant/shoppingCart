@@ -1,0 +1,17 @@
+<div class="cart-container">
+    <div class="cart-title"><span>My Cart</span><mat-icon>shopping_cart</mat-icon></div>
+    <div class="empty-message" *ngIf="!cartProducts.length">There are no products in your cart</div>
+    <div *ngFor="let item of cartProducts">
+        <mat-card class="cart-item">
+            <div class="title">{{item.title}}</div>
+            <div class="amount">{{item.amount}}</div>
+            <div class="total-price">{{getProductPrice(item)}}</div>
+            <div class="actions">
+                <mat-icon class="remove-item" (click)="removeItem(item)">delete</mat-icon>
+                <mat-icon (click)="updateAmount(item, 'decrease')">keyboard_arrow_down</mat-icon>
+                <mat-icon (click)="updateAmount(item, 'increase')">keyboard_arrow_up</mat-icon>
+            </div>
+        </mat-card>
+    </div>
+    <div class="total-cart-price" *ngIf="cartProducts.length">Total: ${{getTotalPrice()}}</div>
+</div>
