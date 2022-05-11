@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { EventManagerService } from '../services/event-manager.service';
 import { FilterCreatorService } from '../services/filter-creator.service';
-import { Product } from '../types/Product';
+import { Product } from '../models/Product';
+import { IFieldFilter } from '../types/IFieldFilter';
 
 @Component({
   selector: 'product',
@@ -23,8 +24,8 @@ export class ProductComponent implements OnInit {
   }
 
   public shouldShow(): boolean {
-    const filters = this.FilterCreatorService.activeFilters;
-    return this.item.shouldDisplay(filters)
+    const filters: Map<string, IFieldFilter> = this.FilterCreatorService.activeFilters;
+    return this.item.matchesFilter(filters)
   }
 
   public addToCart(): void {

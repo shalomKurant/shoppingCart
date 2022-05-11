@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../types/Product';
+import { Product } from '../models/Product';
+import { ILocalStorageProducrInfo } from '../types/ILocalStorageProducrInfo';
 import { LocaStorageAccessService } from './local-storage-access.service';
 
 const productsApi = "https://fakestoreapi.com/products";
@@ -11,14 +12,14 @@ export class ProductProviderService {
 
   constructor(private LocaStorageAccessService: LocaStorageAccessService) { }
 
-  public async getProduct(): Promise<Product[]> {
+  public async getProducts(): Promise<Product[]> {
     const response: Response = await fetch(productsApi);
     const jsonResponse: Product[] = await response.json();
     return this.createObjectList(jsonResponse);
   }
 
   private createObjectList(productsResponse: Product[]): Product[] {
-    const userList: Product[] = this.LocaStorageAccessService.getList();
+    const userList: ILocalStorageProducrInfo[] = this.LocaStorageAccessService.getList();
     return productsResponse.map((product: Product) => {
       const userProduct = userList.find(item => item.id === product.id);
       return new Product(

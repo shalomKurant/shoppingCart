@@ -1,7 +1,7 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { EventManagerService } from '../services/event-manager.service';
 import { LocaStorageAccessService } from '../services/local-storage-access.service';
-import { Product } from '../types/Product';
+import { Product } from '../models/Product';
 
 @Component({
   selector: 'cart',
@@ -27,13 +27,9 @@ export class CartComponent implements OnInit {
     this.cartProducts = this.products.filter(product => userProducts.find(userProduct => userProduct.id === product.id))
   }
 
-  public getProductPrice(product: Product): number {
-    return product.amount * product.price;
-  }
-
   public getTotalPrice(): number {
     return this.cartProducts.reduce((total, next) => {
-      return total + this.getProductPrice(next);
+      return total + (next.amount * next.price);
     }, 0)
   }
 
@@ -41,7 +37,7 @@ export class CartComponent implements OnInit {
     product.amount = 0;
     const indexProductToRemove: number = this.cartProducts.indexOf(product);
     this.cartProducts.splice(indexProductToRemove, 1);
-    this.LocaStorageAccessService.remove(product);
+    this.LocaStorageAccessService.remove({id: product.id, amount: product.amount});
   }
 
   private onProductAdded(newProduct: Product): void {
@@ -52,7 +48,7 @@ export class CartComponent implements OnInit {
       newProduct.amount = 1;
       this.cartProducts.push(newProduct);
     }
-    this.LocaStorageAccessService.save(newProduct);
+    this.LocaStorageAccessService.save({id: newProduct.id, amount: newProduct.amount});
   }
 
   public updateAmount(product: Product, actionType: string): void {
@@ -65,6 +61,6 @@ export class CartComponent implements OnInit {
         return;
       }
     }
-    this.LocaStorageAccessService.save(product);
+    this.LocaStorageAccessService.save({id: product.id, amount: product.amount});
   } 
 }

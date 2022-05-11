@@ -1,7 +1,7 @@
 import { Input, Component, OnInit  } from '@angular/core';
-import { FilterCreatorService } from '../services/filter-creator.service';
-import { Product } from '../types/Product';
-import { IFieldFilter } from "../types/IFieldFilter";
+import { FilterCreatorService } from '../../services/filter-creator.service';
+import { Product } from '../../models/Product';
+import { IFieldFilter } from "../../types/IFieldFilter";
 
 @Component({
   selector: 'filters',
